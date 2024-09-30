@@ -1,5 +1,6 @@
 const express = require("express");
 const urlRoute = require('./routes/url.routes.js')
+const userRoute = require("./routes/user.routes.js")
 const URL = require("./models/url.model.js")
 const { connectToMongoDB } = require("./connect.js")
 
@@ -20,12 +21,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 app.use("/url", urlRoute)
+app.use("/user", userRoute)
 
 app.use("/", staticRoute)
 
 //route
 //user ko redirect karna he given shortId se jude link pe
-app.get("/:shortId", async (req, res) => {
+app.get("/url/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
     const entry = await URL.findOneAndUpdate({
         shortId
