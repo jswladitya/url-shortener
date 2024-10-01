@@ -14,6 +14,7 @@ async function handleGenerateNewShortUrl(req, res) {
     })
 
     return res.render("home", {id: shortID})
+    // wapas se home page render hoga ager user original url daal ke generate click karta he
 }
 
 

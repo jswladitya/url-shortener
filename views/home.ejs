@@ -15,11 +15,14 @@
 <body>
     <h1>URL Shortener</h1>
     <% if (locals.id) { %>
+        <!-- user can click onto this link and in return it will be redirected to the original link -->
         <p>URL Generated : http://localhost:8001/url/<%= id %>
         </p>
         <% } %>
             <div>
-                <form method="POST" action="/url">
+                <!-- form data -->
+                <form method="post" action="/url">
+                    <!-- actions means kis route pe post karna he -->
                     <label>Original URL</label>
                     <input type="text" name="url" placeholder="https://example.com" />
                     <button type="submit">Generate</button>

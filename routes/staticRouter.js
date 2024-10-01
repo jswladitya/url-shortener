@@ -1,10 +1,10 @@
-//static frontend pages ke lie routing
+//routing for static frontend pages
 const express = require("express")
 const URL = require("../models/url.model.js")
 const router = express.Router()
 
 
-// home.ejs ko utha ke render 
+// render home page here
 router.get("/", async (req, res) => {
     const allurls = await URL.find({})
     return res.render('home', {
