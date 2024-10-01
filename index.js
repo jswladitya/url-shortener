@@ -26,13 +26,15 @@ app.use("/user", userRoute)
 app.use("/", staticRoute)
 
 //route
-//user ko redirect karna he given shortId se jude link pe
+//redirecting the user on the given shortID
 app.get("/url/:shortId", async (req, res) => {
     const shortId = req.params.shortId;
     const entry = await URL.findOneAndUpdate({
         shortId
     }, {
-        // visitHistory ek array he to mujhe isme push karna he current date 
+        // since visitHistory is empty now , so we are pushing Date in it
+        // means how many times the url will be clicked , that many times new entry in visitHistory will me pushed or created into the database
+        // by using this data we can find out the total clicks 
         $push: {
             visitHistory: {
                 timestamp: Date.now()
