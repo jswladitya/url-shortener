@@ -3,6 +3,8 @@ const urlRoute = require('./routes/url.routes.js')
 const userRoute = require("./routes/user.routes.js")
 const URL = require("./models/url.model.js")
 const { connectToMongoDB } = require("./connect.js")
+const cookieparser = require("cookie-parser")
+const {restrictToLoggedinUserOnly} = require("./middlewares/auth.middleware.js")
 
 const path = require("path")
 const staticRoute = require("./routes/staticRouter.js")
@@ -19,8 +21,10 @@ app.set('views', path.resolve("./views"));
 //these 2 middleware's tells ki we are supporting/accepting request as a json & form data both
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.use(cookieparser())
 
-app.use("/url", urlRoute)
+// app.use("/url",urlRoute)
+app.use("/url", restrictToLoggedinUserOnly ,urlRoute)
 app.use("/user", userRoute)
 
 app.use("/", staticRoute)
